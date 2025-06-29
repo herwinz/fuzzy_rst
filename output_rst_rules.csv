@@ -1,0 +1,17 @@
+CPU_Level,Mem_Level,Exec_Level,Resource_Status
+Medium,Low,Short,Underutilized
+Medium,Low,Medium,Underutilized
+Medium,Medium,Short,Optimal
+Medium,Medium,Medium,Optimal
+Medium,Medium,Long,Optimal
+Medium,High,Short,Overutilized
+Medium,High,Medium,Overutilized
+Medium,High,Long,Overutilized
+High,Low,Short,Overutilized
+High,Low,Medium,Overutilized
+High,Medium,Short,Overutilized
+High,Medium,Medium,Overutilized
+High,Medium,Long,Overutilized
+High,High,Short,Overutilized
+High,High,Medium,Overutilized
+High,High,Long,Overutilized
