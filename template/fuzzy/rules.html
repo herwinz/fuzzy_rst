@@ -1,0 +1,80 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Rough Set Rules{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<link rel="stylesheet" href="/static/assets/plugins/fontawesome-free/css/all.min.css">
+<link rel="stylesheet" href="/static/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="/static/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+<link rel="stylesheet" href="/static/assets/css/adminlte.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Rough Set Rules</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card">
+        <div class="card-body">
+          <table id="rulesTable" class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th>CPU Level</th>
+                <th>Memory Level</th>
+                <th>Execution Level</th>
+                <th>Resource Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for rule in rules %}
+              <tr>
+                <td>{{ rule.cpu_level }}</td>
+                <td>{{ rule.mem_level }}</td>
+                <td>{{ rule.exec_level }}</td>
+                <td>
+                  {% if rule.resource_status == 'Overutilized' %}
+                    <span class="badge badge-danger">{{ rule.resource_status }}</span>
+                  {% elif rule.resource_status == 'Optimal' %}
+                    <span class="badge badge-success">{{ rule.resource_status }}</span>
+                  {% else %}
+                    <span class="badge badge-warning">{{ rule.resource_status }}</span>
+                  {% endif %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+<script src="/static/assets/plugins/jquery/jquery.min.js"></script>
+<script src="/static/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/static/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/static/assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="/static/assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/static/assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="/static/assets/js/adminlte.min.js"></script>
+<script>
+  $(function () {
+    $('#rulesTable').DataTable({
+      "responsive": true,
+      "autoWidth": false
+    });
+  });
+</script>
+{% endblock %}

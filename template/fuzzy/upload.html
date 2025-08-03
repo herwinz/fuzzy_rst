@@ -1,0 +1,62 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Upload Cloud Workload Data{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<link rel="stylesheet" href="/static/assets/plugins/fontawesome-free/css/all.min.css">
+<link rel="stylesheet" href="/static/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="/static/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+<link rel="stylesheet" href="/static/assets/css/adminlte.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Upload Cloud Workload Data</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="container-fluid">
+
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="alert alert-info">
+            {% for message in messages %}
+              <p>{{ message }}</p>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+
+      <div class="card">
+        <div class="card-body">
+          <form method="POST" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+              {{ form.file.label(class="form-label") }}
+              {{ form.file(class="form-control") }}
+            </div>
+            <div class="form-group">
+              {{ form.submit(class="btn btn-primary") }}
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+<script src="/static/assets/plugins/jquery/jquery.min.js"></script>
+<script src="/static/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/static/assets/js/adminlte.min.js"></script>
+{% endblock %}

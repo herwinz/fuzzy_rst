@@ -1,0 +1,112 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Fuzzyfication Results{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<link rel="stylesheet" href="/static/assets/plugins/fontawesome-free/css/all.min.css">
+<link rel="stylesheet" href="/static/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="/static/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+<link rel="stylesheet" href="/static/assets/css/adminlte.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Fuzzy-RST Results</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card">
+        <div class="card-body">
+          <table id="fuzzyTable" class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th>Job ID</th>
+                <th>Submit Time</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Requested CPUs</th>
+                <th>Used CPUs</th>
+                <th>Requested Memory</th>
+                <th>Used Memory</th>
+                <th>Execution Time</th>
+                <th>Queue Wait Time</th>
+                <th>User ID</th>
+                <th>Job Type</th>
+                <th>Priority Level</th>
+                <th>Node Count</th>
+                <th>Interarrival Time</th>
+                <th>Resource Status</th>
+              </tr>
+            </thead>
+
+            <tbody>
+            {% for row in results %}
+            <tr>
+              <td>{{ row.job_id }}</td>
+              <td>{{ row.submit_time }}</td>
+              <td>{{ row.start_time }}</td>
+              <td>{{ row.end_time }}</td>
+              <td>{{ row.requested_cpus }}</td>
+              <td>{{ row.used_cpus }}</td>
+              <td>{{ row.requested_memory }}</td>
+              <td>{{ row.used_memory }}</td>
+              <td>{{ row.execution_time }}</td>
+              <td>{{ row.queue_wait_time }}</td>
+              <td>{{ row.user_id }}</td>
+              <td>{{ row.job_type }}</td>
+              <td>{{ row.priority_level }}</td>
+              <td>{{ row.node_count }}</td>
+              <td>{{ row.interarrival_time }}</td>
+              <td>
+                {% if row.resource_status == 'Overutilized' %}
+                  <span class="badge badge-danger">{{ row.resource_status }}</span>
+                {% elif row.resource_status == 'Optimal' %}
+                  <span class="badge badge-success">{{ row.resource_status }}</span>
+                {% else %}
+                  <span class="badge badge-warning">{{ row.resource_status }}</span>
+                {% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+          </table>
+
+          <!-- Tombol tambahan untuk melihat Rough Set Rules -->
+          <div class="mt-3">
+            <a href="{{ url_for('fuzzy_blueprint.rules') }}" class="btn btn-primary">
+              <i class="fas fa-ruler-combined"></i> View Rough Set Rules
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+<script src="/static/assets/plugins/jquery/jquery.min.js"></script>
+<script src="/static/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/static/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/static/assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="/static/assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/static/assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="/static/assets/js/adminlte.min.js"></script>
+<script>
+  $(function () {
+    $('#fuzzyTable').DataTable({
+      "responsive": true,
+      "autoWidth": false
+    });
+  });
+</script>
+{% endblock %}

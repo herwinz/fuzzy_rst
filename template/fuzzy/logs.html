@@ -1,0 +1,15 @@
+<h3>Equivalence Class</h3>
+<pre>{{ result.equivalence_class }}</pre>
+
+<h3>Discernibility Matrix</h3>
+<pre>{{ result.discernibility_matrix }}</pre>
+
+<h3>Reduct</h3>
+<pre>{{ result.reduct }}</pre>
+
+<h3>Rules Generated</h3>
+<pre>
+{% for rule, decision in result.rules %}
+IF {{ rule }} THEN {{ decision }}
+{% endfor %}
+</pre>
